@@ -1,0 +1,3 @@
+1. 面包屑功能
+    根据传入功能点，找到面包屑的所有节点及url,从数据库中SYS_MENU表中提取数据
+    SYS_MENU:ID,DESCR,PARENT_ID,LINK_TYPE,ACTION,IS_ACTIVE,IS_SHOW_MENU,IS_SHOW_NAV,DEPTH

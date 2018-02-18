@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ehr.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/cus.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/mode_query_listdata.css' %}" />
+<title>exchangeSetting</title>
+</head>
+<body class="bg_listdata">
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">2013</a></li>
+    <li class="active">十一月</li>
+</ol>
+<div class="bg-bread">
+<div class='bg_query_title'>
+<form id="ex_query_form" class="form-horizontal" role="form">
+    <div name="query_mode" class="form-group">
+        <label for="ex_model_name" class="col-sm-3 control-label">模组名称</label>
+        <div class="col-sm-9">
+            <input id="ex_model_name" name="model_name" class="form-control"  type="text">
+        </div>
+    </div>
+    <div name="query_source_table" class="form-group">
+        <label for="ex_source_table_name" class="col-sm-3 control-label">数据源名称</label>
+        <div class="col-sm-9">
+            <input id="ex_source_table_name" name="source_table_name" class="form-control" type="text">
+        </div>
+    </div>
+    <div name="query_source_col" class="form-group">
+        <label for="ex_source_col_name" class="col-sm-3 control-label">字段名称</label>
+        <div class="col-sm-9">
+            <input id="ex_source_col_name" name="source_col_name" class="form-control"  type="text">
+        </div>
+    </div>
+    <div name="query_source_version" class="form-group">
+        <label for="ex_source_version_name" class="col-sm-3 control-label">版本</label>
+        <div class="col-sm-9">
+            <input id="ex_source_version_name" name="source_version_name" class="form-control" type="text">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default">点击查询</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+
+<div class="bg-listdata">
+    <table>
+        <thead>
+            <th>
+                <td></td>
+                <td>模组</td>
+                <td>数据源</td>
+                <td>版本</td>
+                <td>字段名称</td>
+            </th>
+        </thead>
+        <tbody></tbody>
+
+
+    </table>
+
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+    	$("#btnUpdate").click(function(){
+    		var servername = $ ("servername").val();
+    		var dbusername = $ ("dbusername").val();
+    		var dbpsw = $ ("dbpsw").val();
+    		var dbname = $ ("dbname").val();
+    		var sourcename = $ ("sourcename").val();
+	    });
+    });
+</script>
+</body>
+</html>

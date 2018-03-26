@@ -7,3 +7,6 @@ class EX_SourceSetting(models.Model):
     source_col_name = models.CharField(max_length=40)
     source_version_name = models.CharField(max_length=40)
 
+
+
+

@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-.bg_listdata {background-color: #f5f5f5;}
+.bg_listdata {background-color: #f5f5f5;
+font-family: "Microsoft Yahei", "微软雅黑", Helvetica, Arial, sans-serif
+}
 div.bg-logon-content {width:360px;padding: 10px;border: 1px solid #e5e5e5;background: #f1f1f1;margin:10px auto;}
 div.bg-logon-content.leftcontent {margin-top:10px;margin-left:10px;margin-bottom:10px;float:left}
 div.bg-logon-content.minwidth {width:auto;min-width:360px;}	

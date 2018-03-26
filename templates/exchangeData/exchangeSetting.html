@@ -51,23 +51,38 @@
 </div>
 </div>
 
-<div class="bg-listdata">
+
+<div class="dtQuery_list5">
     <table>
         <thead>
-            <th>
-                <td></td>
-                <td>模组</td>
-                <td>数据源</td>
-                <td>版本</td>
-                <td>字段名称</td>
-            </th>
+            <tr>
+                <th class="TH1">
+                    <input type="checkbox">
+                </th>
+                <th class="TH2">模组</th>
+                <th class="TH3">数据源</th>
+                <th class="TH4">版本</th>
+                <th class="TH5">字段名称</th>
+                <th class="TH6">详细</th>
+            </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            {% for sin_EX_SourceSetting in ex_SourceSetting %}
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>{{ sin_EX_SourceSetting.model_name }}</td>
+                <td>{{ sin_EX_SourceSetting.source_table_name }}</td>
+                <td>{{ sin_EX_SourceSetting.source_col_name }}</td>
+                <td>{{ sin_EX_SourceSetting.source_version_name }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
 
 
     </table>
-
 </div>
+
 
 
 <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>

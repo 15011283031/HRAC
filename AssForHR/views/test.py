@@ -20,7 +20,7 @@ def createDriver():
     firefox_driver.get(url_std)
     time.sleep(2)
     firefox_driver.find_element_by_id('qquin').send_keys('yongqiang.chen')
-    firefox_driver.find_element_by_id('pp').send_keys('y0729301613Q')
+    firefox_driver.find_element_by_id('pp').send_keys('*******')
     time.sleep(2)
     firefox_driver.find_element_by_class_name('login_btn').click()
     time.sleep(2)

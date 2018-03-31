@@ -1,4 +1,8 @@
-from AssForHR import models
+from selenium import webdriver
+import bs4 as bs
 
-ex_SourceSetting = models.EX_SourceSetting.objects.all()
-print(type(ex_SourceSetting))
+driver = webdriver.Firefox()
+url='http://mail.yooli.com'
+driver.get(url)
+driver.close
+

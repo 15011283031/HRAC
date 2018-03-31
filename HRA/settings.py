@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -79,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'assforgaia',
-        'USER': 'sa',
-        'PASSWORD':'y0729301613Q',
-        'HOST':'localhost',
+        'USER': 'root',
+        'PASSWORD':'',
+        'HOST':'127.0.0.1',
         'PORT':'3306',
     }
 }

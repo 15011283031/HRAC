@@ -129,7 +129,7 @@ def saveWebSource(request):
 
 def websourceConfig(request):
     '''request for updateWebSource '''
-    return render_to_response('AssForHR/updateWebSource.html')
+    return render_to_response('assforhr/updateWebSource.html')
 
 
 

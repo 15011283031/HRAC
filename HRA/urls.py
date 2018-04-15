@@ -18,4 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^AssForHR/', include('AssForHR.urls')),
+    url(r'^admin/', admin.site.urls),
 ]

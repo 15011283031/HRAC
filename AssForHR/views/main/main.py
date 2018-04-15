@@ -11,7 +11,7 @@ def main(request):
     dbSourceInfo = [] 
     webSourceInfo.append(updateWebSource.classReadWebSouce().getInfo())
     dbSourceInfo.append(updateLogin.readConn().getInfo())
-    return render_to_response('./AssForHR/main.html', {
+    return render_to_response('./assforhr/main.html', {
         'webSourceInfo': json.dumps(webSourceInfo),
         'dbSourceInfo': json.dumps(dbSourceInfo)
     })

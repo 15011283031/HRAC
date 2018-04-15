@@ -1,0 +1,121 @@
+<body>
+ <canvas id="myCanvas" width="1000" height="1000"></canvas>
+</body>
+ <style>
+     canvas {
+       cursor: pointer;
+       border: 1px solid black;
+     }
+ </style>
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext('2d');
+var previousSelectedCircle;
+var circles = [];
+window.onload = function() {
+    var position_X = 100;
+    var position_s = 17.2*5;
+    canvas.onmousemove = mouseMove;
+    canvas.onmousedown = mouseClick;
+        for (var i=0;i<9;i++){
+            draw(position_X+position_s*i,100,6,50,false);
+            var circle = new Circle(position_X+position_s*i, 100, 6, 50,false);
+            circles.push(circle);
+        }
+    };
+    function draw(x,y,n,r,s){
+        var i,ang;
+        ang= Math.PI*2/n;
+        ctx.save();
+        ctx.fillStyle = 'rgba(237,244,250,.8)';
+        ctx.lineWidth = 1;
+        ctx.translate(x,y);
+        ctx.moveTo(0,-r);
+        ctx.beginPath();
+        if (s){
+            r=r*1.5
+        }
+        for(i=0;i<n;i++){
+          ctx.rotate(ang);
+          ctx.lineTo(0,-r);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+    }
+    function Circle(x, y, n, r, s) {
+        this.x = x;
+        this.y = y;
+        this.num = n;
+        this.radius = r;
+        this.isSelected = s;
+    }
+
+
+    function mouseMove(e) {
+      // 取得画布上被单击的点
+      var clickX = e.pageX - canvas.offsetLeft;
+      var clickY = e.pageY - canvas.offsetTop;
+
+      // 查找被单击的圆圈
+      for(var i=circles.length-1; i>=0; i--) {
+        var circle = circles[i];
+        //使用勾股定理计算这个点与圆心之间的距离
+        var distanceFromCenter = Math.sqrt(Math.pow(circle.x - clickX, 2)
+            + Math.pow(circle.y - clickY, 2))
+        // 判断这个点是否在圆圈中
+        if (distanceFromCenter <= circle.radius) {
+          // 清除之前选择的圆圈
+          if (previousSelectedCircle != null) previousSelectedCircle.isSelected = false;
+          previousSelectedCircle = circle;
+
+          //选择新圆圈
+          circle.isSelected = true;
+
+          //更新显示
+          drawCircles();
+
+          //停止搜索
+          return;
+        }
+      }
+    }
+    function drawCircles() {
+      // 清除画布，准备绘制
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 遍历所有圆圈
+      for(var i=0; i<circles.length; i++) {
+        var circle = circles[i];
+        draw(circle.x,circle.y,circle.num,circle.radius,circle.isSelected);
+      }
+    }
+function mouseClick(e) {
+      // 取得画布上被单击的点
+      var clickX = e.pageX - canvas.offsetLeft;
+      var clickY = e.pageY - canvas.offsetTop;
+
+      // 查找被单击的圆圈
+      for(var i=circles.length-1; i>=0; i--) {
+        var circle = circles[i];
+        //使用勾股定理计算这个点与圆心之间的距离
+        var distanceFromCenter = Math.sqrt(Math.pow(circle.x - clickX, 2)
+            + Math.pow(circle.y - clickY, 2))
+        // 判断这个点是否在圆圈中
+        if (distanceFromCenter <= circle.radius) {
+          // 清除之前选择的圆圈
+          if (previousSelectedCircle != null) previousSelectedCircle.isSelected = false;
+          previousSelectedCircle = circle;
+
+          //选择新圆圈
+          circle.isSelected = true;
+          window.location.href="./24/1/";
+          //停止搜索
+          return;
+        }
+      }
+    }
+
+</script>

@@ -1,0 +1,25 @@
+{%  load staticfiles %}
+
+<div class="container">
+    <div class="row">
+        <div class="span11_color">
+            请点击选择需要管理的星球
+        </div>
+    </div>
+    <div class="row">
+    {% with a=1 %}
+    {% for item in starlists %}
+        {% if  round == 4  or round == 7 or round == 11    %}
+            <div class="row">
+        {% endif %}
+        <div class="span3">
+			<a href="./{{ item.starid }}/">
+                <img alt="300x300" src="{% static 'image/earthmove.gif' %}" />
+            </a>
+		</div>
+
+    {% endfor %}
+    {% endwith %}
+        </div>
+    </div>
+</div>

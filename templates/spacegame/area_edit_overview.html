@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="tabbable" id="tabs-61102">
+				<ul class="nav nav-tabs">
+                    <li{% if panelid == "1" %} class="active"{% endif %}>
+						<a href="../1/" data-toggle="tab">总览</a>
+					</li>
+					<li{% if panelid == "2" %} class="active"{% endif %}>
+						<a href="../2/" data-toggle="tab">建筑</a>
+					</li>
+					<li{% if panelid == "3" %} class="active"{% endif %}>
+						<a href="../3/" data-toggle="tab">人口</a>
+					</li>
+                    <li{% if panelid == "4" %} class="active"{% endif %}>
+						<a href="../4/" data-toggle="tab">能源</a>
+					</li>
+
+				</ul>
+				<div class="tab-content">
+                    {% if panelid == "1" %}
+					    {% include './area_edit_product.html' %}
+                    {% elif  panelid == "2" %}
+                        {% include './area_edit_buildings.html' %}
+                    {% elif  panelid == "3" %}
+                        {% include './area_edit_people.html' %}
+                    {% elif  panelid == "4" %}
+                        {% include './area_edit_energy.html' %}
+                    {% endif %}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

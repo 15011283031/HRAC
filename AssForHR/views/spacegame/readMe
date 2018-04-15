@@ -1,0 +1,18 @@
+# 1.项目 spacegame
+## 页面关联
+- 索引页面 spacegameindex.html 主要用于呈现主页面 包含如下子页面
+    1. 框架页面 mod_basic.html 用于呈现主页面框架
+    2. 组件页面 bannertitle.html 用于呈现上方导航栏，包括：功能菜单（星球、舰队等），状态菜单（属性、物品、资源）等
+    - 索引页面由bannertitle.html功能跳转至功能列表页面
+- 功能列表页面
+    - 星球功能 starmanage.html 用于呈现玩家所拥有的星球信息 包含如下子页面
+        1. 框架页面 mod_basic.html 用于呈现主页面框架
+        2. 组件页面 starlists.html 用于自动生成并呈现星球列表
+        - 组件页面 starlists.html 点击星球图标后会跳到星球显示页面 即星球状况页面starlists/11154/
+    - 星球总览功能 star_overview_all.html 用于呈现整个星球下区域被占用情况 玩家可以点击空白区域建造或者点击自己的区域进行编辑
+        1. 框架页面 mod_basic.html 用于呈现主页面框架
+        2. 组件页面 star_overview_listall.html 用于呈现整个星球的区域生成状况
+        - 组件页面 star_overview_listall.html 点击区域后会跳转到区域编辑页面 即 /spacegame/starmanage/113/24/
+    - 地区编辑功能
+        1. 框架页面 area_edit 用于呈现主页面框架
+

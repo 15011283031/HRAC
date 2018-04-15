@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response,render
 from suds.client import Client
 import http.cookiejar as cookielib
-from AssForHR import models
+#from AssForHR import models
 
 
 
@@ -15,7 +15,7 @@ def exchangeSettingLogin(request):
     #     , "source_version_name": '1.0.0.0'}
     # models.EX_SourceSetting.objects.create(**dic_insertdata)
 
-    ex_SourceSetting = models.EX_SourceSetting.objects.all()
+    #ex_SourceSetting = models.EX_SourceSetting.objects.all()
     for sin_EX_SourceSetting in ex_SourceSetting:
         print("模组名称：%s；数据源名称：%s；列名：%s；版本号：%s；" % (sin_EX_SourceSetting.model_name
                                                   , sin_EX_SourceSetting.source_table_name

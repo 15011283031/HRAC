@@ -113,5 +113,5 @@ def saveNewConnecttion(request):
 
 def loginConfig(request):
     '''request for updateLogin '''
-    return render_to_response('AssForHR/updateLogin.html')
+    return render_to_response('assforhr/updateLogin.html')
 

@@ -103,9 +103,11 @@ def building_add(new_building, buildings):
         else:
             pass
     if i > 0:
-        pass
+        models.BuildingLists.objects.filter(BuildingID=new_building['BuildingID']).delete()
+        models.BuildingLists.objects.create(**new_building)
     else:
         models.BuildingLists.objects.create(**new_building)
+
 
 
 public_config_groups = models.public_config_group.objects.all()
@@ -135,10 +137,26 @@ public_config_codes = models.public_config_code.objects.all()
 
 
 building_models = models.building_model.objects.all()
-new_building_model = {'building_model_id': '1', 'building_model_name': 'Nuclear power generator'
-    , 'building_type': 'function', 'building_descr': 'projuect energy', 'building_path': '/image/building1.png'
+new_building_model1 = {'building_model_id': '1', 'building_model_name': 'Nuclear power generator'
+    , 'building_type': 'function', 'building_desc': 'projuect energy', 'building_path': '/image/building1.png'
     , 'work_hours': 400, 'max_worker_num': 10, 'product_type': 'energy', 'production_num': 40}
-building_model_add(new_building_model, building_models)
+new_building_model2 = {'building_model_id': '2', 'building_model_name': '伐木场'
+    , 'building_type': 'function', 'building_desc': '生产木材', 'building_path': '/image/building2.png'
+    , 'work_hours': 400, 'max_worker_num': 10, 'product_type': 'wood', 'production_num': 40}
+new_building_model3 = {'building_model_id': '3', 'building_model_name': '采石场'
+    , 'building_type': 'function', 'building_desc': '生产石头', 'building_path': '/image/building2.png'
+    , 'work_hours': 400, 'max_worker_num': 10, 'product_type': 'stone', 'production_num': 40}
+new_building_model4 = {'building_model_id': '4', 'building_model_name': '农场'
+    , 'building_type': 'function', 'building_desc': '生产粮食', 'building_path': '/image/building2.png'
+    , 'work_hours': 400, 'max_worker_num': 10, 'product_type': 'rice', 'production_num': 40}
+new_building_model5 = {'building_model_id': '5', 'building_model_name': '养猪场'
+    , 'building_type': 'function', 'building_desc': '生产猪', 'building_path': '/image/building2.png'
+    , 'work_hours': 400, 'max_worker_num': 10, 'product_type': 'pig', 'production_num': 40}
+building_model_add(new_building_model1, building_models)
+building_model_add(new_building_model2, building_models)
+building_model_add(new_building_model3, building_models)
+building_model_add(new_building_model4, building_models)
+building_model_add(new_building_model5, building_models)
 building_models = models.building_model.objects.all()
 [print(i) for i in building_models]
 
@@ -188,6 +206,9 @@ areas = models.AreaLists.objects.all()
 new_area_star = models.starlists.objects.get(starid='2')
 area_add({'areaid': '24', 'area_name': 'TestArea24', 'loc_star': new_area_star
     , 'loc_x': '14', 'loc_y': '13', 'loc_z': '13'}, areas)
+
+area_add({'areaid': '23', 'area_name': 'TestArea24', 'loc_star': new_area_star
+    , 'loc_x': '14', 'loc_y': '13', 'loc_z': '13'}, areas)
 areas = models.AreaLists.objects.all()
 [print(i) for i in areas]
 
@@ -197,11 +218,17 @@ new_building_player = models.PlayerLists.objects.get(PlayerID='2')
 new_building_area = models.AreaLists.objects.get(areaid='24')
 new_building_model = models.building_model.objects.get(building_model_id='1')
 print(new_building_model)
-new_building = {'BuildingID': '1', 'OwnerID': '2', 'building_status_id': '1_2'
+new_building1 = {'BuildingID': '1', 'OwnerID': '2', 'building_status_id': '1_2'
     , 'PlayerID': new_building_player
     , 'areaid': new_building_area, 'building_model_id': new_building_model
-                , 'now_worker_num': 0, 'now_production_num': 0}
-building_add(new_building, buildings)
+                , 'now_worker_num': 44, 'now_production_num': 43,'now_work_hours': 350.0}
+new_building_area = models.AreaLists.objects.get(areaid='23')
+new_building2 = {'BuildingID': '2', 'OwnerID': '2', 'building_status_id': '1_2'
+    , 'PlayerID': new_building_player
+    , 'areaid': new_building_area, 'building_model_id': new_building_model
+                , 'now_worker_num': 44, 'now_production_num': 43,'now_work_hours': 350.0}
+building_add(new_building1, buildings)
+building_add(new_building2, buildings)
 buildings = models.BuildingLists.objects.all()
 [print(i) for i in buildings]
 

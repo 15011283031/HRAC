@@ -16,5 +16,8 @@ urlpatterns = [
     url(r'^spacegame/starmanage/(?P<starid>\d+)/$', spacegameindex.star_overview_all),
     url(r'^spacegame/starmanage/$', spacegameindex.movetostar, name='movetostar'),
     url(r'^spacegame/starmanage/(?P<starid>\d+)/(?P<areaid>\d+)/(?P<panelid>\d+)/$', spacegameindex.area_edit),
+    url(r'^spacegame/starmanage/(?P<starid>\d+)/(?P<areaid>\d+)/(?P<panelid>\d+)/main_building_edit/$', spacegameindex.area_main_building_edit),
+    url(r'^spacegame/starmanage/(?P<starid>\d+)/(?P<areaid>\d+)/(?P<panelid>\d+)/add_building_edit/$', spacegameindex.area_add_building_edit),
+    url(r'^spacegame/starmanage/(?P<starid>\d+)/(?P<areaid>\d+)/(?P<panelid>\d+)/main_building_build/$', spacegameindex.area_main_building_build),
 
 ]

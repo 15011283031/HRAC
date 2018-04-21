@@ -1,0 +1,81 @@
+
+{%  extends './mod_basic.html' %}
+{%  load staticfiles %}
+
+{% block content-container %}
+    <body class="cusbody">
+        <div class="container-fluid">
+            <br/>
+            <p>当前已有建筑（点击建筑返回）</p>
+            <div class="col-xs-12">
+            <table class="table">
+                <colgroup>
+                    <col style="width: 75%">
+                    <col style="width: 25%">
+                </colgroup>
+                <tr>
+                    <td rowspan="3"><a href="../"><img src="{% static 'image/building2.png' %}"></a></td>
+                    <td>{{ building.building_model_id.building_model_name }}</td>
+                </tr>
+                <tr>
+                    <td>建筑物状态:<p>{{ building_status }}</p></td>
+                </tr>
+                <tr>
+                    <td>建筑进度:<p>{{ building.now_work_hours }}/{{ building.building_model_id.work_hours }}</p></td>
+                </tr>
+            </table>
+            </div>
+            <p>选择建筑</p>
+            <div class="col-xs-12">
+
+                <table class="table">
+                <tr class="noline_th">
+                    <td>建筑物描述</td>
+                    <td>操作</td>
+                </tr>
+                    {% for building_model in building_models %}
+                        <tr>
+                        <td>
+                            <p>建筑物名称:</p>
+                            <p>&nbsp&nbsp{{ building_model.building_model_name }}</p>
+                        </td>
+                        <td rowspan="3">
+                            <form action="" method="POST">{% csrf_token %}
+                            <button name="building_model_id" class="btn btn-primary" type="submit"
+                                    value="{{ building_model.building_model_id }}"
+                                    onclick="return validate()"/>选择建造</button>
+                            </form>
+                            <p>建筑工时 :</p>
+                            <p>&nbsp&nbsp{{ building_model.work_hours }}</p>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                            <p>建筑物简介:</p>
+                            <p>&nbsp&nbsp{{ building_model.building_desc }}</p>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                            <img src="{% static 'image/building1.png' %}">
+                        </td>
+                        </tr>
+                        <tr></tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </body>
+
+{% endblock %}
+
+<script type="text/javascript">
+    function validate() {
+        if (confirm("提交表单?"))
+            {return true;}
+        else
+            {return false;}
+    }
+
+</script>

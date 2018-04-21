@@ -106,12 +106,15 @@ class BuildingLists(models.Model):
         , on_delete=models.CASCADE, default='0')
     now_worker_num = models.IntegerField(default=0)
     now_production_num = models.BigIntegerField(default=0)
+    now_work_hours = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
 
     def __str__(self):
-        return '{BuildingID:%s | OwnerID:%s| building_status_id:%s| PlayerID:%s| areaid:%s| building_model_id:%s' \
-               '| now_worker_num:%s| now_production_num:%s}' \
-               % (self.BuildingID, self.OwnerID, self.building_status_id, self.PlayerID, self.areaid
-                  , self.building_model_id, self.now_worker_num, self.now_production_num)
+        return '{BuildingID:%s | OwnerID:%s| building_status_id:%s' \
+               '| now_worker_num:%s| now_production_num:%s| now_work_hours:%s' \
+               '| PlayerID:%s| areaid:%s| building_model_id:%s}' \
+               % (self.BuildingID, self.OwnerID, self.building_status_id
+                  , self.now_worker_num, self.now_production_num, self.now_work_hours
+                  , self.PlayerID, self.areaid, self.building_model_id)
 
 
 class PlayerLists(models.Model):

@@ -1,5 +1,5 @@
 <body>
- <canvas id="myCanvas" width="1000" height="1000"></canvas>
+ <canvas id="myCanvas" height="400px"></canvas>
 </body>
  <style>
      canvas {
@@ -13,13 +13,18 @@ var ctx = canvas.getContext('2d');
 var previousSelectedCircle;
 var circles = [];
 window.onload = function() {
-    var position_X = 100;
+    var position_X = 50;
     var position_s = 17.2*5;
     canvas.onmousemove = mouseMove;
     canvas.onmousedown = mouseClick;
         for (var i=0;i<9;i++){
-            draw(position_X+position_s*i,100,6,50,false);
-            var circle = new Circle(position_X+position_s*i, 100, 6, 50,false);
+            j = parseInt((i)/3)*3
+            k = parseInt((i)/3)
+            n = 1.72/2*50
+            x = position_X+position_s*(i-j)+(k/2-parseInt(k/2))*2*n
+            y = 100+75*k
+            draw(x,y,6,50,false);
+            var circle = new Circle(x, y, 6, 50,false);
             circles.push(circle);
         }
     };
@@ -27,12 +32,14 @@ window.onload = function() {
         var i,ang;
         ang= Math.PI*2/n;
         ctx.save();
+        {#填充颜色#}
         ctx.fillStyle = 'rgba(237,244,250,.8)';
         ctx.lineWidth = 1;
         ctx.translate(x,y);
         ctx.moveTo(0,-r);
         ctx.beginPath();
         if (s){
+            {#当被选中时放大1.5倍显示#}
             r=r*1.5
         }
         for(i=0;i<n;i++){

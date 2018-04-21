@@ -1,5 +1,45 @@
+{%  load staticfiles %}
+
 <div class="tab-pane active" id="panel-000002">
-    <p>
-        建筑页面.
-    </p>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+        <p>主要建筑插槽（点击调整）</p>
+		<div class="col-xs-12">
+            <div class="image-block">
+                <a href="./main_building_edit/">
+			        <img  src="{% static 'image/building1.png' %}" />
+                </a>
+            </div>
+		</div>
+        <p>附属建筑插槽（点击调整）</p>
+		<div class="col-xs-12">
+			<div class="row-fluid">
+				<div class="col-xs-6">
+                    <a href="./add_building_edit/">
+					    <img class="img-rounded add_image_icon" src="{% static 'image/squareness_addpoint.png' %}" />
+                    </a>
+				</div>
+				<div class="col-xs-6">
+                    <a href="./add_building_edit/">
+    					<img class="img-rounded add_image_icon" src="{% static 'image/squareness2_addpoint.png' %}" />
+                    </a>
+				</div>
+			</div>
+            <div class="row-fluid "><div class="add_image_block col-xs-12"></div> </div>
+			<div class="row-fluid ">
+                    <div class="col-xs-6">
+                        <a href="./add_building_edit/">
+                            <img class="img-rounded add_image_icon" src="{% static 'image/squareness3_addpoint.png' %}" />
+                        </a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="./add_building_edit/">
+                            <img class="img-rounded add_image_icon" src="{% static 'image/sixrange_addpoint.png' %}" />
+                        </a>
+                    </div>
+            </div>
+		</div>
+    </div>
+</div>
 </div>

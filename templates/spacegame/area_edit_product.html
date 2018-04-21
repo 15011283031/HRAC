@@ -1,20 +1,58 @@
 {%  load staticfiles %}
+
 <div class="tab-pane active" id="panel-000001">
-<div class="container-fluid">
-<div class="row-fluid">
-	<div class="span12">
-		<img alt="256x256" src="{% static 'image/building1.png' %}" />
-	</div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="image-block">
+                    <img src="{% static 'image/building1.png' %}" />
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content-block">
+                    {{ building.building_model_id.building_desc }}
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-block">
+                    <thody>
+                        <tr>
+                            <td>建筑名称</td>
+                            <td>{{ building.building_model_id.building_model_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>建筑状态</td>
+                            <td>{{ building_status }}</td>
+                        </tr>
+                        <tr>
+                            <td>建筑类型</td>
+                            <td>{{ building.building_model_id.building_type }}</td>
+                        </tr>
+                        <tr>
+                            <td>当前人工/最大工人</td>
+                            <td>{{ building.building_model_id.now_worker_num }}/{{ building.building_model_id.max_worker_num }}</td>
+                        </tr>
+                        <tr>
+                            <td>产出类型</td>
+                            <td>{{ building.building_model_id.product_type }}</td>
+                        </tr>
+                        <tr>
+                            <td>当前产量/单位产量</td>
+                            <td>{{ building.building_model_id.now_production_num }}/{{ building.building_model_id.production_num }}</td>
+                        </tr>
+                    </thody>
 
-    <div class="row-fluid">
-	    <div class="span12">
 
-	    </div>
+                </table>
+
+
+            </div>
+        </div>
     </div>
-
-
-</div>
-</div>
 </div>
 
 

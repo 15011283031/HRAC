@@ -7,6 +7,11 @@ from django.shortcuts import render
 from AssForHR import models
 
 
+def get_building_status_desc(building_status_id):
+    building_status_desc = models.public_config_code.objects.get(item_id=building_status_id).item_name
+    return building_status_desc
+
+
 def main(request):
     '''request for updateLogin '''
     return render_to_response('spacegame/spacegameindex.html')
@@ -35,9 +40,14 @@ def area_edit(request, starid, areaid, panelid):
     区域编辑页面，编辑区域：进行建造、安排等工作
     """
     # building
-    buildings = models.BuildingLists.objects.get(areaid=areaid)
-    print('starid:%s'% starid)
-    print('areaid:%s'% areaid)
-    print('areaid:%s'% panelid)
-    context = {'starid': id, 'areaid': areaid, 'panelid': panelid}
+    print('starid:%s' % starid)
+    print('areaid:%s' % areaid)
+    print('areaid:%s' % panelid)
+    building = models.BuildingLists.objects.get(OwnerID=2, areaid=24)
+    print('building:%s' % building)
+    print('building_status_id:%s' % building.building_status_id)
+    building_status = get_building_status_desc(building.building_status_id)
+    print('building_status:%s' % building_status)
+    context = {'starid': id, 'areaid': areaid, 'panelid': panelid, 'building': building
+        , 'building_status': building_status}
     return render(request, 'spacegame/area_edit.html', context)

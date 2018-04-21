@@ -35,4 +35,26 @@ TABLE.dtQuery_list2 TD.TD1{width:25%;text-align:left;}
 TABLE.dtQuery_list2 TD.TD2{width:25%;text-align:center;}
 
 
+.image-block {
+	height: 200px;
+	padding: 10px;
+	margin: 20px;
+	/*background-color: rgba(238, 238, 238, 0.2);*/
+}
+
+.content-block {
+	background-color: rgba(238, 238, 238, 0.2);
+	margin: 20px;
+	padding: 10px;
+	font-family: "Microsoft Yahei", "微软雅黑", Helvetica, Arial, sans-serif;
+	height: 200px;
+}
+.table-block {
+	background-color: rgba(238, 238, 238, 0.2);
+	margin: 20px;
+	padding: 10px;
+	font-family: "Microsoft Yahei", "微软雅黑", Helvetica, Arial, sans-serif;
+	height: 200px;
+}
+
 

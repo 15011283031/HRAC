@@ -37,7 +37,7 @@ class starlists(models.Model):
     loc_z = models.IntegerField(default=0)
 
     def __str__(self):
-        return '||starid:%s | star_name:%s||' % (self.starid, self.star_name)
+        return '{starid:%s | star_name:%s}' % (self.starid, self.star_name)
 
 
 class AreaLists(models.Model):
@@ -54,53 +54,64 @@ class AreaLists(models.Model):
                % (self.areaid, self.area_name, self.loc_star, self.loc_x, self.loc_y, self.loc_z)
 
 
-class Building_Model(models.Model):
-    buildingID = models.CharField(max_length=40)
-    buildingName = models.CharField(max_length=200, default='undifined2')
-    buildingType = models.CharField(max_length=40)
-    buildingDescr = models.TextField()
-    buildingPath = models.CharField(max_length=400)
-    workHours = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
-    maxWorkerNum = models.IntegerField(default=0)
-    productType = models.CharField(max_length=40)
-    productionNum = models.BigIntegerField(default=0)
+class building_model(models.Model):
+    building_model_id = models.CharField(max_length=40, unique=True, default='0')
+    building_model_name = models.CharField(max_length=200, default='undifined2')
+    building_type = models.CharField(max_length=40)
+    building_desc = models.TextField()
+    building_path = models.CharField(max_length=400)
+    work_hours = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
+    max_worker_num = models.IntegerField(default=0)
+    product_type = models.CharField(max_length=40)
+    production_num = models.BigIntegerField(default=0)
 
     def __str__(self):
-        return '||buildingID:%s | buildingName:%s||' % (self.buildingID, self.buildingName)
+        return '{building_model_id:%s | building_model_name:%s| building_type:%s| building_desc:%s' \
+               '| building_path:%s| work_hours:%s| max_worker_num:%s| product_type:%s| production_num:%s}' \
+               % (self.building_model_id, self.building_model_name, self.building_type, self.building_desc
+                  , self.building_path, self.work_hours, self.max_worker_num, self.product_type, self.production_num)
 
 
-class PublicConfigGroup(models.Model):
-    GroupID = models.CharField(max_length=40, default='0_0')
-    GroupName = models.CharField(max_length=200, default='undifined')
-    OrderID = models.IntegerField(default=0)
-
-    def __str__(self):
-        return '||GroupID:%s | GroupName:%s||' % (self.GroupID, self.GroupName)
-
-
-class PublicConfigCode(models.Model):
-    ItemID = models.CharField(max_length=40, default='0_0')
-    ItemName = models.CharField(max_length=200, default='undifined')
-    ItemValue = models.CharField(max_length=200, default='undifined')
-    OrderID = models.IntegerField(default=0)
-    GroupID = models.CharField(max_length=40, default='0_0')
+class public_config_group(models.Model):
+    group_id = models.CharField(max_length=40, unique=True, default='0')
+    group_name = models.CharField(max_length=200, default='undifined')
+    order_id = models.IntegerField(default=0)
 
     def __str__(self):
-        return '||ItemID:%s | ItemName:%s||' % (self.ItemID, self.ItemName)
+        return '{group_id:%s | group_name:%s}' % (self.group_id, self.group_name)
+
+
+class public_config_code(models.Model):
+    item_id = models.CharField(max_length=40, default='0_0')
+    item_name = models.CharField(max_length=200, default='undifined')
+    item_value = models.CharField(max_length=200, default='undifined')
+    order_id = models.IntegerField(default=0)
+    group_id = models.ForeignKey(to="public_config_group", to_field='group_id'
+        , on_delete=models.CASCADE, default='0')
+
+    def __str__(self):
+        return '{item_id:%s | item_name:%s| item_value:%s| group_id:%s}' \
+               % (self.item_id, self.item_name, self.item_value, self.group_id)
 
 
 class BuildingLists(models.Model):
     BuildingID = models.CharField(max_length=40, default='0')
     OwnerID = models.CharField(max_length=200, default='undifined')
-    BuildingStatusID = models.CharField(max_length=200, default='undifined')
+    building_status_id = models.CharField(max_length=200, default='undifined')
     PlayerID = models.ForeignKey(to="PlayerLists", to_field='PlayerID'
                                  , on_delete=models.CASCADE, default='0')
     areaid = models.ForeignKey(to="AreaLists", to_field='areaid'
                                , on_delete=models.CASCADE, default='0')
+    building_model_id = models.ForeignKey(to="building_model", to_field='building_model_id'
+        , on_delete=models.CASCADE, default='0')
+    now_worker_num = models.IntegerField(default=0)
+    now_production_num = models.BigIntegerField(default=0)
 
     def __str__(self):
-        return '{BuildingID:%s | OwnerID:%s| BuildingStatusID:%s| PlayerID:%s| areaid:%s}' \
-               % (self.BuildingID, self.OwnerID, self.BuildingStatusID, self.PlayerID, self.areaid)
+        return '{BuildingID:%s | OwnerID:%s| building_status_id:%s| PlayerID:%s| areaid:%s| building_model_id:%s' \
+               '| now_worker_num:%s| now_production_num:%s}' \
+               % (self.BuildingID, self.OwnerID, self.building_status_id, self.PlayerID, self.areaid
+                  , self.building_model_id, self.now_worker_num, self.now_production_num)
 
 
 class PlayerLists(models.Model):

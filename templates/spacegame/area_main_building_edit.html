@@ -2,8 +2,10 @@
 {%  extends './mod_basic.html' %}
 {%  load staticfiles %}
 
+
 {% block content-container %}
     <body class="cusbody">
+    {% include './bannertitle.html' %}
         <div class="container-fluid">
             <br/>
             <p>当前已有建筑（点击建筑返回）</p>
@@ -67,9 +69,6 @@
             </div>
         </div>
     </body>
-
-{% endblock %}
-
 <script type="text/javascript">
     function validate() {
         if (confirm("提交表单?"))
@@ -79,3 +78,8 @@
     }
 
 </script>
+{% endblock %}
+
+
+
+

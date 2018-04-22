@@ -1,4 +1,13 @@
 <div class="container">
+    <div class="col-xs-12">
+        {% if user.is_authenticated %}
+            <p>欢迎你：<a href="#">{{ user.username }}</a></p>
+        {% else %}
+            <p>你还没有登录，请
+                <button class="btn btn-default"><a href="{% url 'login' %}?next={{ request.path }}">登录</a></button>
+            </p>
+        {% endif %}
+    </div>
 	<div class="row-fluid">
         <div class="col-xs-12">
             <table class="table table-condensed">
@@ -9,7 +18,7 @@
                     <col width='25%'/>
                 </colgroup>
                 <tr>
-                    <td><a href="./starmanage"><button class="btn btn-inverse btn-block" type="label">星球</button></a></td>
+                    <td><a href="/AssForHR/spacegame/starmanage"><button class="btn btn-inverse btn-block" type="label">星球</button></a></td>
                     <td><button class="btn btn-inverse btn-block" type="button">殖民地</button></td>
                     <td><button class="btn btn-inverse btn-block" type="button">预留1</button></td>
                     <td><button class="btn btn-inverse btn-block" type="button">预留2</button></td>

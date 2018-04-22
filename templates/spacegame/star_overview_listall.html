@@ -1,5 +1,9 @@
 <body>
- <canvas id="myCanvas" height="400px"></canvas>
+{% include './bannertitle.html' %}
+
+
+
+{# <canvas id="myCanvas" height="400px"></canvas>#}
 </body>
  <style>
      canvas {
@@ -8,23 +12,43 @@
      }
  </style>
 <script>
+<!--需要将JS代码编写到script标签中-->
+/*
+ * 控制浏览器弹出一个提示框
+ */
+alert("Hello JavaScript");
+
+/*
+ * 控制浏览器在页面中输出一个内容
+ * document.write()向body中写一个内容
+ */
+document.write("看我出来不？？？");
+
+/*
+    向控制台输出一个内容
+ * */
+console.log("你看我在哪出来~~~");
+
+
+
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext('2d');
 var previousSelectedCircle;
 var circles = [];
 window.onload = function() {
-    var position_X = 50;
-    var position_s = 17.2*5;
+    var position_X = 30;
+    var position_s = 17.2*3;
+    var r = 30;
     canvas.onmousemove = mouseMove;
     canvas.onmousedown = mouseClick;
         for (var i=0;i<9;i++){
             j = parseInt((i)/3)*3
             k = parseInt((i)/3)
-            n = 1.72/2*50
+            n = 1.72/2*r
             x = position_X+position_s*(i-j)+(k/2-parseInt(k/2))*2*n
-            y = 100+75*k
-            draw(x,y,6,50,false);
-            var circle = new Circle(x, y, 6, 50,false);
+            y = 100+45*k
+            draw(x,y,6,r,false);
+            var circle = new Circle(x, y, 6, r,false);
             circles.push(circle);
         }
     };

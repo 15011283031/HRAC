@@ -9,7 +9,6 @@ from AssForHR.views.spacegame import spacegame_forms
 from AssForHR.views.spacegame.tools import model_edit
 
 
-
 def get_building_status_desc(building_status_id):
     building_status_desc = models.public_config_code.objects.get(item_id=building_status_id).item_name
     return building_status_desc
@@ -17,7 +16,8 @@ def get_building_status_desc(building_status_id):
 
 def main(request):
     '''request for updateLogin '''
-    return render_to_response('spacegame/spacegameindex.html')
+    context = {}
+    return render(request, 'spacegame/spacegameindex.html', context)
 
 
 def movetostar(request):

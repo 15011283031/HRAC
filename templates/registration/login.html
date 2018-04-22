@@ -1,0 +1,32 @@
+{% extends '../spacegame/mod_basic.html' %}
+{% block content-container %}
+<body class="cusbody">
+    <div class="container-fluid">
+        <div class="col-xs-12">
+            <h3>登录</h3>
+            <form class="form" action="{% url 'login' %}  " method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                    {% if field.help_text %}
+                        <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                {% endfor %}
+                <p><button type="submit" class="btn btn-primary ">登录</button></p>
+                <p><input type="hidden" name="next" value="{{ next }}"/></p>
+            </form>
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-6">
+                <span>没有账号？<a>立即注册</a></span>
+            </div>
+            <div class="col-xs-12">
+                <br/><span><a href="reset_password.html">忘记密码？</a></span>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

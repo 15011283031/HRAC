@@ -129,3 +129,5 @@ STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), '../static/').replace('\\','/'),
 )
 
+LOGOUT_REDIRECT_URL = '/AssForHR/spacegame'
+LOGIN_REDIRECT_URL = '/AssForHR/spacegame'

@@ -7,6 +7,7 @@ from django.shortcuts import render
 from AssForHR import models
 from AssForHR.views.spacegame import spacegame_forms
 from AssForHR.views.spacegame.tools import model_edit
+from AssForHR.views.spacegame import tests
 
 
 def get_building_status_desc(building_status_id):
@@ -16,6 +17,7 @@ def get_building_status_desc(building_status_id):
 
 def main(request):
     '''request for updateLogin '''
+    tests.tests()
     context = {}
     return render(request, 'spacegame/spacegameindex.html', context)
 

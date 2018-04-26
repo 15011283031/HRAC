@@ -11,6 +11,7 @@ import json  # json数据格式，用于写入数据库链接配置信息
 import os  # 用于检测文件目录是否存在
 
 from django.http import HttpResponseRedirect
+from AssForHR.views.regis import get_base_dir
 
 # 设置随机字符串 默认被 saveNewConnecttion 调用
 
@@ -74,10 +75,11 @@ class WebSource:
 
 
 def readWebSource():
-    webConn = WebSource(r'http://peter/zybxehr',r'peter',r'80', r'sa',r'111111')    
-    if os.path.exists('./AssForHR/static/config/websource.json'):
-        if os.path.getsize('./AssForHR/static/config/websource.json'):
-            with open('./AssForHR/static/config/websource.json') as sourceFile:
+    webConn = WebSource(r'http://peter/zybxehr',r'peter',r'80', r'sa',r'111111')
+    base_dir = get_base_dir()
+    if os.path.exists(base_dir + '/AssForHR/static/config/websource.json'):
+        if os.path.getsize(base_dir + '/AssForHR/static/config/websource.json'):
+            with open(base_dir + '/AssForHR/static/config/websource.json') as sourceFile:
                 readSourceDict = json.load(sourceFile)
                 decrypt_webtmpkey = prpcrypt.prpcrypt(readSourceDict.get('websalt'))
                 decrypt_webpsw = decrypt_webtmpkey.decrypt(readSourceDict.get('webpsw'))
@@ -89,9 +91,10 @@ def classReadWebSouce():
     ''' readConn from sourcename.json
     '''
     webConn = WebSource(r'http://peter/zybxehr',r'peter',r'80', r'sa',r'111111')
-    if os.path.exists('./AssForHR/static/config/websource.json'):
-        if os.path.getsize('./AssForHR/static/config/websource.json'):
-            with open('./AssForHR/static/config/websource.json') as connFile:
+    base_dir = get_base_dir()
+    if os.path.exists(base_dir + '/AssForHR/static/config/websource.json'):
+        if os.path.getsize(base_dir + '/AssForHR/static/config/websource.json'):
+            with open(base_dir + '/AssForHR/static/config/websource.json') as connFile:
                 readConnDict = json.load(connFile)
                 decrypt_tmpkey = prpcrypt.prpcrypt(readConnDict['websalt'])
                 decrypt_psw = decrypt_tmpkey.decrypt(readConnDict['webpsw'])
@@ -116,9 +119,9 @@ def saveWebSource(request):
         sourceInfo['websalt'] = str(tempkey)
     
         tmpWebSource = WebSource(sourceInfo.get('rooturl'),sourceInfo.get('host'),sourceInfo.get('port'),sourceInfo.get('webname'),tempsw)
-        
-        with open('./AssForHR/static/config/websource.json','w+') as file_object:
-            json.dump(sourceInfo,file_object)
+        base_dir = get_base_dir()
+        with open(base_dir + '/AssForHR/static/config/websource.json','w+') as file_object:
+            json.dump(sourceInfo, file_object)
             
         ehrWebSource = classReadWebSouce()
         webSourceInfo = classReadWebSouce().getInfo() 

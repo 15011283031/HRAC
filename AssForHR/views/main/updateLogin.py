@@ -12,6 +12,8 @@ from AssForHR.views.main.tools.randomstring import randomstring
 import json  # json数据格式，用于写入数据库链接配置信息
 
 import os  # 用于检测文件目录是否存在
+from AssForHR.views.regis import get_base_dir
+
 
 # from django.http import JsonResponse
 from django.http import HttpResponseRedirect
@@ -68,10 +70,11 @@ class DBSource:
 
 def readConn():
     # readConn from sourcename.json
+    base_dir = get_base_dir()
     dbConn = DBSource(r'peter', r'sa', r'111111', r'gaia')
-    if os.path.exists('./AssForHR/static/config/sourcename.json'):
-        if os.path.getsize('./AssForHR/static/config/sourcename.json'):
-            with open('./AssForHR/static/config/sourcename.json') as connFile:
+    if os.path.exists(base_dir + '/AssForHR/static/config/sourcename.json'):
+        if os.path.getsize(base_dir + '/AssForHR/static/config/sourcename.json'):
+            with open(base_dir + '/AssForHR/static/config/sourcename.json') as connFile:
                 readConnDict = json.load(connFile)
                 decrypt_tmpkey = prpcrypt.prpcrypt(readConnDict['dbsalt'])
                 decrypt_psw = decrypt_tmpkey.decrypt(readConnDict['dbpsw'])
@@ -100,9 +103,9 @@ def saveNewConnecttion(request):
         connInfo['dbsalt'] = str(tempkey)
         
         tmpehr = DBSource(connInfo.get('servername'),connInfo.get('dbusername'),tempsw,connInfo.get('dbname'))
-    
-        with open('./AssForHR/static/config/sourcename.json','w+') as file_object:
-            json.dump(connInfo,file_object)
+        base_dir = get_base_dir()
+        with open(base_dir + '/static/config/sourcename.json', 'w+') as file_object:
+            json.dump(connInfo, file_object)
     
         ehr = readConn()
         dbSourceInfo = readConn().getInfo() 

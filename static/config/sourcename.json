@@ -1,1 +1,1 @@
-{"servername": "localhost", "dbusername": "sa", "dbname": "assforgaia", "sourcename": "PS\u672c\u5730", "dbpsw": "8b28495d4c393815aa0191cba1e29323", "dbsalt": "4c626f766b4a6e57"}
+{"servername": "localhost", "dbname": "assforgaia", "sourcename": "\u672c\u5730mysql", "dbpsw": "b80a40a816b66c850f1a3edb11079219", "dbsalt": "41736e6b69777a59", "dbusername": "root"}

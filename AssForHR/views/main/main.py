@@ -7,8 +7,8 @@ from AssForHR.views.main import updateWebSource, updateLogin
 
 def main(request):
     '''request for updateWebSource '''
-    webSourceInfo = []   
-    dbSourceInfo = [] 
+    webSourceInfo = []
+    dbSourceInfo = []
     webSourceInfo.append(updateWebSource.classReadWebSouce().getInfo())
     dbSourceInfo.append(updateLogin.readConn().getInfo())
     return render_to_response('./assforhr/main.html', {

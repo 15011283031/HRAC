@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from AssForHR.views.main import main, updateLogin, updateWebSource
+from AssForHR.views.main import main, updateLogin, updateWebSource, checktime
 from AssForHR.views.exchange import exchangeSetting
 from AssForHR.views.spacegame import spacegameindex
 
@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^updateWebSource$', updateWebSource.websourceConfig, name='websourceConfig'),
     url(r'^saveWebSource/$', updateWebSource.saveWebSource, name='saveWebSource'),
     url(r'^main/$', main.main, name='main'),
+    url(r'^checkout/$', checktime.checkout_show, name='checkout'),
     url(r'^exchangeSetting/$', exchangeSetting.exchangeSettingLogin, name='exchangeSettingLogin'),
     url(r'^spacegame/$', spacegameindex.main, name='main'),
     url(r'^spacegame/starmanage/(?P<starid>\d+)/$', spacegameindex.star_overview_all),

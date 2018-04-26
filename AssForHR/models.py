@@ -2,8 +2,8 @@
 from django.db import models
 
 
-def decode(info):
-    return info.decode('utf-8')
+# def decode(info):
+#     return info.decode('utf-8')
 
 
 """
@@ -17,6 +17,11 @@ def decode(info):
 """
 
 # Create your models here.
+
+
+class system_config(models.Model):
+    config_name = models.CharField(max_length=40)
+    value = models.CharField(max_length=40)
 
 
 class EX_SourceSetting(models.Model):
@@ -130,4 +135,17 @@ class BuildingsView(models.Model):
     class Meta:
          managed = False
          db_table = "AssForHR_buildings_view"
+
+
+class check_out(models.Model):
+    department = models.CharField(max_length=40, default=' ')
+    emplid = models.CharField(max_length=40, default=' ')
+    name = models.CharField(max_length=40, default=' ')
+    date = models.DateField()
+    time = models.TimeField()
+    check_time = models.DateTimeField()
+    machineid = models.CharField(max_length=40, default=' ')
+
+
+
 

@@ -76,3 +76,9 @@ TABLE.dtQuery_list2 TD.TD2{width:25%;text-align:center;}
 .mid_height{
     height:30px;
 }
+.pagination-center{
+	text-align: center;
+}
+.cus_column{
+	margin: 5px 0;
+}

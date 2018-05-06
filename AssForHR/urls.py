@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^saveWebSource/$', updateWebSource.saveWebSource, name='saveWebSource'),
     url(r'^main/$', main.main, name='main'),
     url(r'^checkout/$', checktime.checkout_show, name='checkout'),
+
+
     url(r'^exchangeSetting/$', exchangeSetting.exchangeSettingLogin, name='exchangeSettingLogin'),
     url(r'^spacegame/$', spacegameindex.main, name='main'),
     url(r'^spacegame/starmanage/(?P<starid>\d+)/$', spacegameindex.star_overview_all),

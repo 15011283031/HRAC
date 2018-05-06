@@ -1,129 +1,155 @@
 {% extends './hr_basic.html' %}
-{%  load staticfiles %}
+{% load staticfiles %}
 {% block content-container %}
-<body>
-<br/>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<form action="" method="POST">{% csrf_token %}
-                <div class="span12">
-                    <div class="span3">
-                        <input type="text" class="mid_height form-control " name="department_name" placeholder="部门名称"
-                               value="{{ form_values.department_name }}">
-                    </div>
-                    <div class="span3">
-                        <input type="date" class="mid_height form-control " name="start_date" placeholder="开始日期"
-                        value="{{ form_values.start_date }}">
-                    </div>
-                    <div class="span3">
-                        <input type="date" class="mid_height form-control " name="end_date" placeholder="结束日期"
-                        value="{{ form_values.end_date }}">
-                    </div>
-                    <div class="span3">
 
-                    </div>
-                </div>
-                <div class="span12">
-                    <div class="span3">
-                        <input type="text" class="mid_height form-control "  name="employee_id" placeholder="员工编码"
-                        value="{{ form_values.employee_id }}">
-                    </div>
-                    <div class="span3">
-                        <input type="text" class="mid_height form-control " name="employee_name" placeholder="员工姓名"
-                               value="{{ form_values.employee_name }}">
-                    </div>
-                    <div class="span3">
+    <body>
+    <br/>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <form id="search_checkout" action="" method="POST">{% csrf_token %}
+                    <div class="col-md-12 cus_column">
+                        <div class="col-md-3 cus_column">
+                            <select class="selectpicker show-tick mid_height form-control" multiple
+                                    data-live-search="true" data-actions-box="true"
+                                    id="department_name" name="department_name" multiple title="部门名称"
+                                    value="{{ form_values.department_name }}">
+                                {% for sin_department in  department_list %}
+                                    <option value="{{ sin_department }}">{{ sin_department }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3 cus_column">
+                            <input type="date" class="mid_height form-control " name="start_date" placeholder="开始日期"
+                                   value="{{ form_values.start_date }}">
+                        </div>
+                        <div class="col-md-3 cus_column">
+                            <input type="date" class="mid_height form-control " name="end_date" placeholder="结束日期"
+                                   value="{{ form_values.end_date }}">
+                        </div>
+                        <div class="col-md-3 cus_column">
 
+                        </div>
                     </div>
-                    <div class="span3">
-                        <button type="submit" class="mid_height btn ">查找</button>
+                    <div class="col-md-12 cus_column">
+                        <div class="col-md-3 cus_column">
+                            <input type="text" class="mid_height form-control " name="employee_id" placeholder="员工编码"
+                                   value="{{ form_values.employee_id }}">
+                        </div>
+                        <div class="col-md-3 cus_column">
+                            <input type="text" class="mid_height form-control " name="employee_name" placeholder="员工姓名"
+                                   value="{{ form_values.employee_name }}">
+                        </div>
+                        <div class="col-md-3 cus_column">
+                            <input type="text" id="now_page" name="now_page" hidden="hidden" value="{{ pg }}">
+                        </div>
+                        <div class="col-md-3 cus_column">
+                            <button id="search_form" type="submit" class="mid_height btn ">查找</button>
+                        </div>
                     </div>
-                </div>
-			</form><br/><br/><br/>
 
-        <p>
-			<table class="table table-hover table-bordered">
-				<thead>
-					<tr>
-						<th>部门名称</th>
-						<th>员工编码
-						</th>
-						<th>员工姓名
-						</th>
-						<th>刷卡日期
-						</th>
+                </form>
+                <br/><br/><br/>
+
+                <p>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>部门名称</th>
+                        <th>员工编码
+                        </th>
+                        <th>员工姓名
+                        </th>
+                        <th>刷卡日期
+                        </th>
                         <th>刷卡时间
-						</th>
+                        </th>
                         <th>刷卡设备
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-                {% if check_nums > 0 %}
-                    {% for checktime in checkout_lists %}
-					<tr>
-                    <td>
-                        {{ checktime.department }}
-                    </td>
-                    <td>
-                        {{ checktime.emplid }}
-                    </td>
-                    <td>
-                        {{ checktime.name }}
-                    </td>
-                    <td>
-                        {{ checktime.date }}
-                    </td>
-                    <td>
-                        {{ checktime.time }}
-                    </td>
-                    <td>
-                        {{ checktime.machineid }}
-                    </td>
+                        </th>
                     </tr>
-                    {% endfor %}
-                {% endif %}
-				</tbody>
-			</table>
-        </p>
+                    </thead>
+                    <tbody>
+                    {% if check_nums > 0 %}
+                        {% for checktime in checkout_lists %}
+                            <tr>
+                                <td>
+                                    {{ checktime.department }}
+                                </td>
+                                <td>
+                                    {{ checktime.emplid }}
+                                </td>
+                                <td>
+                                    {{ checktime.name }}
+                                </td>
+                                <td>
+                                    {{ checktime.date }}
+                                </td>
+                                <td>
+                                    {{ checktime.time }}
+                                </td>
+                                <td>
+                                    {{ checktime.machineid }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+                </p>
 
 
-        <div class="pagination pagination-small pagination-right">
-            <ul>
-                {% if checkout_lists.has_previous %}
-					<li>
-						<a href="?page={{ checkout_lists.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-                {% endif %}
-
-				{% for pg in checkout_lists.paginator.page_range %}
-                    {%  if pg <= max_page and pg >= min_page %}
-                        {% if checkout_lists.number == pg %}
-                            <li class="active"><a href="?page={{ pg }}">{{ pg }} </a>
-                            </li>
-                        {% else %}
-                            <li><a href="?page={{ pg }}">{{ pg }}</a>
+                <div class="col-xs-12">
+                    <ul class="pagination-center pagination pagination-sm">
+                        {% if checkout_lists.has_previous %}
+                            <li>
+                                <a href="javascript:void(0)"
+                                   onclick="goto_page({{ checkout_lists.previous_page_number }})" aria-label="Previous"><span
+                                        aria-hidden="true">&laquo;</span>
+                                </a>
                             </li>
                         {% endif %}
-                    {%  endif %}
-				{% endfor %}
 
-                {% if checkout_lists.has_next %}
-                    <li>
-					<a href="?page={{ checkout_lists.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
-					</a>
-					</li>
-                {% endif %}
-            </ul>
+                        {% for pg in checkout_lists.paginator.page_range %}
+                            {% if pg <= max_page and pg >= min_page %}
+                                {% if checkout_lists.number == pg %}
+                                    <li class="active"><a href="javascript:void(0)"
+                                                          onclick="goto_page({{ pg }})">{{ pg }} </a>
+                                    </li>
+                                {% else %}
+                                    <li><a href="javascript:void(0)" onclick="goto_page({{ pg }})">{{ pg }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if checkout_lists.has_next %}
+                            <li>
+                                <a href="javascript:void(0)" onclick="goto_page({{ checkout_lists.next_page_number }})"
+                                   aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+
+            </div>
         </div>
+    </div>
+    </body>
+    <script>
 
-		</div>
-	</div>
-</div>
-</body>
-<script>
+        function goto_page(page) {
+            console.log("当前数值：" + page);
+            $('#now_page').val(page);
+            document.getElementById("now_page").value = page;
+            $('#search_checkout').submit();
+            console.log("submit");
+        }
 
-</script>
+
+        $('#department_name').selectpicker('val', "{{ dept_str }}".split(','));
+        $('#department_name').selectpicker('refresh');
+
+    </script>
 {% endblock %}

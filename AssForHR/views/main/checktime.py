@@ -4,10 +4,12 @@ import django
 django.setup()
 from django.shortcuts import render_to_response
 from django.shortcuts import render
+from django.http import HttpResponse
 from AssForHR import models
 import MySQLdb
 import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json #json数据格式，用于写入数据库链接配置信息
 
 
 class Db_connnect():
@@ -108,25 +110,44 @@ def check_out_syn():
 
 
 def checkout_show(request):
-    checkout_lists = models.check_out.objects.all()
-
+    checkout_lists = models.check_out.objects.all().order_by("department", "emplid", "-check_time")
+    # 对部门进行去重
+    department_lists = models.check_out.objects.values('department').all()
+    department_list = []
+    page = ''
+    dept_str=''
+    for sin_department in department_lists:
+        department_list.append(sin_department['department'])
+    department_list = list(set(department_list))
+    while '' in department_list:
+        department_list.remove('')
+    print(department_list)
 
     if request.method == "POST":
         check_out_syn()
-        department_name = request.POST.get('department_name')
+        department_name = request.POST.getlist('department_name')
+        dept_str = ''
+        if len(department_name) > 0:
+            for each_dept in department_name:
+                dept_str = dept_str + each_dept + ','
+            dept_str = dept_str[:len(dept_str)-1]
+        print('dept_str:%s' % dept_str)
         employee_id = request.POST.get('employee_id')
         employee_name = request.POST.get('employee_name')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        page = request.POST.get('now_page')
         if start_date == '':
             start_date = '1990-01-01'
         if end_date == '':
             end_date = '2099-01-01'
-        print('department_name:%s' % (department_name))
+        print('department_name:%s' % (type(department_name)))
         print('employee_id:%s' % (employee_id))
         print('employee_name:%s' % (employee_name))
         print('start_date:%s' % (start_date))
         print('end_date:%s' % (end_date))
+        print('page:%s' % (page))
+
         form_values = {}
         form_values['department_name'] = department_name
         form_values['employee_id'] = employee_id
@@ -135,7 +156,10 @@ def checkout_show(request):
         form_values['end_date'] = end_date
 
 
-        checkout_lists = models.check_out.objects.filter(department=department_name
+
+
+
+        checkout_lists = models.check_out.objects.filter(department__in=department_name
             , emplid__contains=employee_id
             , name__contains=employee_name
             , check_time__gte=datetime.datetime.strptime(start_date, '%Y-%m-%d')
@@ -145,7 +169,7 @@ def checkout_show(request):
         pass
 
     paginator = Paginator(checkout_lists, 20)  # Show 25 contacts per page
-    page = request.GET.get('page')
+
 
     max_page = 6
     min_page = 1
@@ -165,9 +189,12 @@ def checkout_show(request):
         min_page = paginator.num_pages - 6
     if request.method == "POST":
         content = {'checkout_lists': checkout_page, 'check_nums': len(checkout_page)
-            , 'form_values': form_values, 'max_page': max_page, 'min_page': min_page}
+            , 'form_values': form_values, 'max_page': max_page, 'min_page': min_page
+            , 'department_list': department_list, 'dept_str': dept_str}
     else:
         content = {'checkout_lists': checkout_page, 'check_nums': len(checkout_page)
-            , 'max_page': max_page, 'min_page': min_page}
+            , 'max_page': max_page, 'min_page': min_page, 'department_list': department_list
+            , 'dept_str': dept_str}
     print(content)
     return render(request, 'assforhr/checkout.html', content)
+
